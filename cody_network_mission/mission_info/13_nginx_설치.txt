@@ -1,0 +1,6 @@
+1. SSH 연결 후 nginx 설치
+    1-1. sudo apt update
+    1-2. sudo apt install nginx -y
+    1-3. sudo systemctl status nginx
+        => 실행 상태 확인
+    1-4. 

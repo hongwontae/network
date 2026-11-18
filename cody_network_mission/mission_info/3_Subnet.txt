@@ -22,6 +22,11 @@
 3. AWS Subnet 생성
     3-1. 서브넷 생성 클릭
     3-2. VPC ID에서 cloud-lab-vpc 선택
-    3-3. 서브넷 이름 : cloud-lab-public-subnet
+    3-3. 서브넷 이름 : cloud-public-subnet
+    3-4. 가용 영역 : ap-northeast-2a
     3-4. IPv4 서브넷 CIDR 블록
         => 10.0.1.0/24
+    
+
+4. 정리
+    => 현재 사용할 수 있는 IPv4의 주소는 251개입니다.

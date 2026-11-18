@@ -1,0 +1,27 @@
+1. SSH로 EC2 접속하기
+    1-1. ssh -i ~/Downloads/cloud-mission-key.pem ubuntu@13.124.80.143
+        => EC2에 SSH로 접속합니다.
+        => ssh : 원격 컴퓨터에 보안 연결
+        => -i : 인증에 사용할 개인 키 파일 지정
+        => ubuntu : ubuntu AMI의 기본 로그인 사용자
+        => 13.124.80.143 : EC2의 퍼블릭 IPv4 주소
+    
+    1-2. The authenticity of host '13.124.80.143' can't be established.
+        => yes
+    
+    1-3. WARNING: UNPROTECTED PRIVATE KEY FILE!
+        Permissions 0644 for 'cloud-mission-key.pem' are too open.
+        This private key will be ignored.
+        Permission denied (publickey).
+        => 개인 키 파일(.pem)의 접근 권한이 너무 넓어서 SSH가 접속을 거부한 것입니다.
+        => 키 파일의 권한은 0644 -> 다른 사용자도 개인 키 파일을 읽을 수 있는 상태
+    
+    1-4. chmod 400 ~/Downloads/cloud-mission-key.pem
+    1-5. ls -l ~/Downloads/cloud-mission-key.pem
+        => -r--------  1 user  staff  ... cloud-mission-key.pem
+    
+    1-6. 다시 접속
+        => ssh -i ~/Downloads/cloud-mission-key.pem ubuntu@13.124.80.143
+    
+    1-7. 접속 성공
+        => ubuntu@ip-10-0-1-235:~$ 

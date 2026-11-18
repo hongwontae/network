@@ -1,0 +1,23 @@
+1. iam user로 접속
+    1-1. 계정 id, username, password 입력
+    1-2. 비밀번호 변경
+    1-3. 접속 완료
+
+
+2. 서울 리전으로 변경
+
+3. MFA 설정
+    3-1. 오른쪽 상단 이름 클릭
+    3-2. 보안 자격 증명 클릭
+    3-3. MFA에 들어갈 수 없음
+        => 정책 생성
+        => MFA를 허용하는 정책 생성 (cloud-mission-self-mfa-policy)
+        => 사용자 그룹에서 정책 연결
+    3-4. 멀티 팩터 인증(MFA)에서 MFA 디바이스 할당 클릭
+    3-5. 디바이스 이름 : cloud-mission-mfa
+    3-6. 인증 관리자 앱 선택
+    3-7. next 클릭
+    3-8. 권한 부족 발생
+        => 디바이스 이름이 cloud-mission-user 같아야 함
+    3-9. 디바이스 설정
+        => google otp를 통해 qr 코드를 찍고 MFA 숫자 입력

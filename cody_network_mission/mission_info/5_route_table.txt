@@ -1,0 +1,35 @@
+1. Routing Table
+    1-1. VPC에 IGW가 연결되었다고 해서 패킷이 자동으로 전달되지는 않습니다.
+    1-2. 라우팅 테이블은 목적지 IP 주소에 따라 패킷을 어디로 전달할지 결정하는 규칙입니다.
+
+
+2. AWS Routing Table 생성
+    2-1. 이름 : cloud-public-rt
+    2-2. VPC : cloud-mission-vpc 선택
+    2-3. 라우팅 테이블 생성 클릭
+    => 새 라우팅 테이블에는 10.0.0.0/16 → local 경로가 자동으로 생성됩니다.
+
+
+3. AWS Routing Table 인터넷 경로 추가하기
+    3-1. 라우팅 편집 클릭
+    3-2. 라우팅 추가 클릭
+    3-3. 0.0.0.0/0	인터넷 게이트웨이 → cloud-mission-igw
+    3-4. 변경 사항 저장
+        => 10.0.0.0/16 → local
+        => 0.0.0.0/0  → cloud-mission-igw
+
+
+4. Public Subnet과 Route Table 연결하기
+    4-1. 라우팅 테이블 생성하고 경로를 추가해도, 서브넷과 연결하지 않으면 해당 서브넷에 적용되지 않습니다.
+    4-2. 라우팅 테이블에서 cloud-public-rt 선택
+    4-3. 아래쪽 서브넷 연결 탭 클릭
+    4-4. 서브넷 연결 편집 클릭
+    4-5. cloud-public-subnet 선택
+    4-6. 연결 저장 클릭
+
+
+5. 설정 완료 후 네트워크
+    => VPC는 10.0.0.0/16
+    => Public Subnet은 10.0.1.0/24
+    => cloud-public-rt(라우팅 테이블)은 10.0.0.0/16은 local | 0.0.0.0/0은 IGW
+    => cloud-mission-igw 존재

@@ -1,13 +1,19 @@
-1. 실습 사용자 생성
-    1-1. 검색창에서 iam 입력
-    1-2. 왼쪽 사이드 바에서 IAM 사용자 클릭
-    1-3. 아무런 사용자가 없습니다.
-    1-4. 사용자 생성 클릭
-        => 사용자 이름 : cloud-lab-console-user
-        => 직접 정책 연결
-        => 과제에서 AWS가 제공하는 관리자 권한 그대로 부여하지 않아야 함
-        => 필요한 권한만 부여해야 함
-    1-5. 일단 권한 없이 사용자 생성
-        => 권한이 없다면 EC2, VPC, S3 접근 모두 거부됩니다.
-        => 우리가 만드는 CloudLabPolicy에 EC2와 VPC 관리에 필요한 작업만 허용할 것입니다.
+1. 서울 리전 선택하기
+    1-1. 서울 리전에서 VPC 조회가 거부
+    You are not authorized to perform this operation.
+    ec2:DescribeVpcs
+    Explicit deny in a service control policy.
+
+        => 리전별 접근 제한이 존재합니다.
+
+    1-2. AWS Organizations와 SCP 확인
+        => 조직 관리 계정인 Cloud-Lab-Team Management Account로 이동
+        => AWS Organizations → 정책 → 서비스 제어 정책
+        => AdvancedModeRegionRestrictionSecurityControlPolicy 접속
+        => "aws:RequestedRegion"에 ap-northeast-2 추가
+    
+    1-3. SCP를 수정한 뒤 서울 VPC 콘솔에 접속했을 때, VPC 목록은 조회되었지만 다음 팝업이 나타났습니다.
+        => 아시아 태평양(서울) 리전 제한됨. 이 리전에 대한 액세스가 콘솔에서 제한되었습니다.
+        => 첫 번째: AWS 권한 정책(SCP), 두 번째: AWS 콘솔의 표시 리전 설정
+        => 1-3은 두 번쨰 이고 리전 설정을 통해 해결합니다.
 
