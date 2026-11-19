@@ -8,24 +8,23 @@
 
 ## 배포 주소 및 실제 검증
 
-- 확인 당시 접속 URL: **http://13.124.189.205**
+- 확인 당시 접속 URL: **http://43.202.47.71**
 - 확인 결과: 브라우저에 **`Welcome to nginx!`** 기본 페이지 표시
 - EC2 내부 검사: `curl -I http://localhost` → **`HTTP/1.1 200 OK`**
-- SSH: macOS 터미널에서 `ubuntu@13.124.189.205` 접속 성공 (개인 키 인증)
+- SSH: macOS 터미널에서 `ubuntu@43.202.47.71` 접속 성공 (개인 키 인증 성공)
 - 서버 버전: `nginx/1.24.0 (Ubuntu)` (검증 당시 출력)
-- **EC2에서 외부 HTTPS로 나가는 통신 (`curl -I https://example.com`)은 아직 결과가 제출되지 않아 미검증**
 
 > URL은 실습 당시 퍼블릭 IP입니다. 인스턴스를 중지 후 재시작하거나 종료하면 바뀌거나 더 이상 접속되지 않을 수 있습니다. `http://`로 접속하세요(HTTPS 미구성).
 
 ### 증빙 이미지
 
-![브라우저 외부 접속 성공](docs/evidence/browser-nginx.png)
+![브라우저 외부 접속 성공](./서버_접속.png)
 
-![EC2 내부 curl 200 OK](docs/evidence/ec2-localhost-200.png)
+![EC2 내부 curl 200 OK](./%20curl_증거.png)
 
 ## 아키텍처
 
-![AWS 아키텍처](docs/architecture.png)
+![AWS 아키텍처](./architecture.png)
 
 | 구성 요소 | 실제 구성 |
 | --- | --- |
@@ -60,19 +59,3 @@ curl -I http://localhost
 # 미검증 항목: 직접 실행 후 결과 확인
 curl -I https://example.com
 ```
-
-## 제출 파일
-
-- `docs/architecture.png` — VPC/서브넷/IGW/EC2/보안 그룹 및 트래픽 흐름
-- `docs/evidence/browser-nginx.png` — 외부 브라우저 접속 증빙
-- `docs/evidence/ec2-localhost-200.png` — EC2 내부 200 응답 증빙
-- `docs/troubleshooting.md` — 실제 IAM 조회 권한 오류 분석과 조치
-- `docs/cleanup-checklist.md` — **실습 종료 시 실행**할 정리 체크리스트
-
-## 미완료 / 제출 전 확인
-
-- [x] 외부 브라우저 접속 (A) 성공
-- [x] EC2 내부 `localhost` HTTP 200 응답
-- [x] SSH 개인 키 접속 성공
-- [x] EC2의 `curl -I https://example.com` 실행 결과 캡처
-- [x] 종료 시 리소스 삭제 확인 및 정리 체크리스트 갱신
