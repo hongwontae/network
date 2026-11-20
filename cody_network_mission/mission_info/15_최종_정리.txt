@@ -159,3 +159,10 @@ FTP 제어 연결	               TCP	                    21
 
 12. http://<EC2 퍼블릭 IPv4 주소> -> nginx 접근
 13. ssh -i ~/Downloads/test_key_4.pem ubuntu@<퍼블릭IP> -> SSH 접근
+14. curl -i http://localhost/health -> 성공
+
+
+15. ALB
+    => 여러 서버로 들어오는 HTTP/HTTPS 요청을 분산하고 전달하는 서비스입니다.
+    => EC2 서버가 하나뿐이라면, 해당 서버에 장애가 발생했을 때 서비스를 계속 제공하기 어렵습니다.
+    => 사용자가 ALB에 요청하면 ALB가 정상 상태인 EC2 서버 중 하나를 선택해 요청을 전달    
