@@ -120,6 +120,17 @@
     8-8. Security Group은 Stateful
         => 인바운드 규칙이 허용한 연결에 대한 응답은 아웃바운드 규칙과 관계없이 허용됩니다.
         => 아웃바운드 규칙이 허용한 연결에 대한 응답은 인바운드 규칙과 관계없이 허용됩니다.
+    
+    8-9. AWS 인바운드 규칙 구조
+        => 유형 : AWS가 제공하는 규칙 프리셋 이름 (HTTP, HTTPS, SSH)
+        => 프로토콜 : 네트워크에서 사용하는 통신 프로토콜 (TCP, UDP, ICMP) 
+        => 포트 범위 : 해당 규칙이 허용할 목적지 포트
+        => 소스 : 어떤 출발지 IP에서 들어오는 트래픽을 허용할지
+        => 유형은 응용 계층이고, 프로토콜은 전송 계층
+        => 프로토콜이 포트를 사용하고 신뢰성 있는 바이트 스트림을 제공합니다.
+
+        => AWS 보안 그룹은 일반적으로 HTTP 요청의 실제 내용을 검사하지 않습니다.
+        => AWS는 출발지 IP가 허용 범위에 있는가? TCP 통신인가? 목적지 포트가 80인가? 확인하고 허용합니다.
 
 
 9. SSH 접속 후 curl -I https://example.com
@@ -130,3 +141,21 @@
     => HTTP 응답: 실제 웹 서버가 응답을 보내.
     => example.com은 IANA가 예제와 문서 작성 용도로 관리하는 도메인입니다.
     => 즉, EC2 서버가 example.com 서버와 소통하는 것
+
+
+10. 해당 맥 ip 주소 체크
+    => 공인 IP -> curl -4 https://checkip.amazonaws.com
+    => 사설 IP -> ipconfig getifaddr en0
+
+11. 응용 계층 프로토콜과 기본 포트 번호
+
+응용 계층 프로토콜	              전송 계층 프로토콜	       기본 포트
+HTTP	                     TCP	                  80
+HTTPS (HTTP/1.1, HTTP/2)	 TCP	                  443
+HTTPS (HTTP/3)	             UDP (QUIC)	              443
+SSH	                         TCP	                  22
+FTP 제어 연결	               TCP	                    21
+
+
+12. http://<EC2 퍼블릭 IPv4 주소> -> nginx 접근
+13. ssh -i ~/Downloads/test_key_4.pem ubuntu@<퍼블릭IP> -> SSH 접근
